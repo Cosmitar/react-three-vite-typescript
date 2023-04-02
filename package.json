@@ -29,7 +29,9 @@
     "@types/three": "^0.150.0",
     "@vitejs/plugin-react": "^3.1.0",
     "typescript": "^5.0.3",
-    "vite": "^4.1.4"
+    "vite": "^4.1.4",
+    "vite-plugin-glsl": "^1.1.2",
+    "vite-plugin-gltf": "^3.1.0"
   },
   "scripts": {
     "dev": "vite --host",
