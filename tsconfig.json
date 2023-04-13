@@ -14,9 +14,8 @@
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "build/**/*"]
+  "exclude": ["node_modules", "build/**/*", "*.png"]
 }
