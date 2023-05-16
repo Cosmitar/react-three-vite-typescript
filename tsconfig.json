@@ -15,7 +15,7 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "noUnusedLocals": true,
-    "types": ["node", "vite/client"]
+    "types": ["@types/node", "vite/client"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "build/**/*", "*.png"]
