@@ -1,10 +1,10 @@
 import { Box } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { useRef } from 'react'
+import { MutableRefObject, useRef } from 'react'
 import { Mesh } from 'three'
 
 const DemoScene = () => {
-  const boxRef = useRef<Mesh>()
+  const boxRef = useRef<Mesh>() as MutableRefObject<Mesh>
 
   useFrame((state, delta) => {
     boxRef.current!.rotation.y += 0.01
