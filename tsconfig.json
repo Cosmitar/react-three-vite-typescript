@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "build/dist",
     "module": "esnext",
-    "target": "es5",
+    "target": "es2015",
     "lib": ["es6", "dom"],
     "sourceMap": true,
     "allowJs": true,
@@ -15,7 +15,7 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "noUnusedLocals": true,
-    "types": ["@types/node", "vite/client"]
+    "types": ["@react-three/fiber", "@types/node", "vite/client"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "build/**/*", "*.png"]
