@@ -15,7 +15,7 @@ export default function UI() {
 
     let portal = document.querySelector(PORTAL_SELECTOR)
 
-    if (!portal) {
+    if (!portal && root) {
       portal = document.createElement('div')
 
       portal.setAttribute('id', PORTAL_ID)
