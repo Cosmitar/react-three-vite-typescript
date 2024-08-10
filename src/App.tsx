@@ -1,13 +1,19 @@
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
-import DemoScene from './scenes/DemoScene/DemoScene'
+import RouterScreen from './screens/RouterScreen/RouterScreen'
+import PlatformProvider from './services/react/PlatformProvider'
+import OverlayTransitions from './components-web/OverlayTransitions/OverlayTransitions'
+import UI from './components-web/UI/UI'
 
 const App = () => {
   return (
-    <Canvas camera={{ fov: 70, position: [0, 0, 3] }}>
-      <OrbitControls />
-      <DemoScene />
-    </Canvas>
+    <PlatformProvider>
+      <OverlayTransitions>
+        <UI />
+        <Canvas camera={{ fov: 70, position: [0, 5, 8] }} shadows>
+          <RouterScreen />
+        </Canvas>
+      </OverlayTransitions>
+    </PlatformProvider>
   )
 }
 

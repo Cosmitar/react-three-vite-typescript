@@ -1,0 +1,100 @@
+@font-face {
+  font-family: 'RubikMonoOneRegular';
+  src: url('/fonts/RubikMonoOneRegular-6pqq.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.ui {
+  --color-text: white;
+  --color-text-shadow: #1e1d1cdd;
+  --main-ff: 'RubikMonoOneRegular';
+  --layout-background-color-opaque: '#333';
+  
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  pointer-events: auto;
+  touch-action: none;
+
+  .ui_layer {
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+    touch-action: none;
+    
+    &.fullscreen {
+      position: absolute;
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // FONTS
+  .label-component {
+    position: relative;
+    color: var(--color-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .font-foreground {
+      position: absolute;
+      text-shadow: 0.1em 0.0em var(--color-text-shadow);
+      -webkit-text-stroke: 0.03em var(--color-text-shadow);
+
+    }
+
+    .font-background {
+      text-shadow: 0.1em 0.0em var(--color-text-shadow),
+        0.1em 0.09em var(--color-text-shadow),
+        0.01em 0.09em var(--color-text-shadow);
+    }
+  }
+
+  .font {
+    font-family: var(--main-ff);
+
+    &.contrast {
+      color: var(--color-text-shadow)
+    }
+  }
+
+  .font-md {
+    font-size: x-large;
+  }
+
+  .font-xl {
+    font-size: xx-large;
+  }
+
+  .font-xxl {
+    font-size: 4em;
+  }
+
+  .font-jumbo {
+    font-size: 8em;
+  }
+
+  @media (max-width: 800px) or (max-height: 800px) {
+    .font-xl {
+      font-size: large;
+    }
+
+    .font-xxl {
+      font-size: larger;
+    }
+
+    .font-jumbo {
+      font-size: 2em;
+    }
+  }
+  // ----- //
+}
