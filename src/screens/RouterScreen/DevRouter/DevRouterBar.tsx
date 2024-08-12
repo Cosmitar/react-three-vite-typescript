@@ -85,7 +85,7 @@ export default function DevRouterBar({
           >
             <div style={{ position: 'absolute' }}>
               {buttons.map((button, idx) => (
-                <button key={`${button.label}-${idx}`} onClick={button.onClick}>
+                <button key={`${button.label}-${idx}`} onClick={button.onClick} style={{ backgroundColor: 'white', border: '2px dashed gray', color: 'black'}}>
                   [{button.keyCode.replace(/Key|Digit/, '')}] {button.label}
                 </button>
               ))}
