@@ -1,6 +1,6 @@
 import { forwardRef, MutableRefObject, useEffect, useImperativeHandle, useRef } from 'react'
 import { Instance, InstanceProps } from '@react-three/drei'
-import { forceRefresh } from './VoxelProvider'
+import { forceRefresh, setAttribute } from './VoxelProvider'
 import { deepClone } from '../utils'
 import { Object3D } from 'three'
 
@@ -15,13 +15,14 @@ export default forwardRef<InstanceAPI, InstanceProps>(function ReactiveInstance(
 
   const API = useRef<InstanceAPI>({
     instance: ref,
-    updateAttribute: () => {
-      console.log(API.instance)
+    updateAttribute: (key: string, value: any) => {
+      setAttribute(key, value, API.instance.current.userData.id)
+      // console.log(API.instance.current.userData.id)
     },
   }).current
 
   useImperativeHandle(outterRef, () => API, [])
-  
+
   useEffect(() => {
     forceRefresh()
     return () => forceRefresh()

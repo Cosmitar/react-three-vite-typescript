@@ -1,11 +1,11 @@
-import { Box, CameraControls, InstanceProps } from '@react-three/drei'
-import Color from '../../voxel/Materials/Color'
-import VoxelProvider, { setAttribute } from '../../voxel/VoxelProvider/VoxelProvider'
-import { Group, Mesh, NearestFilter, RepeatWrapping, TextureLoader, Vector3, Vector3Tuple, Vector4 } from 'three'
-import { useEffect, useRef } from 'react'
+import { Box, CameraControls } from '@react-three/drei'
+// import Color from '../../voxel/Materials/Color'
+import VoxelProvider from '../../voxel/VoxelProvider/VoxelProvider'
+import { NearestFilter, RepeatWrapping, TextureLoader, Vector3Tuple, Vector4 } from 'three'
+import { MutableRefObject, useEffect, useRef } from 'react'
 import useCappedFrame from '../../utils/useCappedFrames'
 import StoneLight from '../../voxel/Prefab/StoneLight'
-import ReactiveInstance from '../../voxel/VoxelProvider/ReactiveInstance'
+import ReactiveInstance, { InstanceAPI } from '../../voxel/VoxelProvider/ReactiveInstance'
 import { getDefaultEncodedSkin, getEncodedSkin } from '../../voxel/VoxelProvider/shaderMaterial/VoxelAtlasMaterial/VoxelAtlasMaterial'
 const loader = new TextureLoader()
 const texture = loader.load('images/texture_atlas_small_hd.png')
@@ -13,22 +13,26 @@ texture.wrapS = texture.wrapT = RepeatWrapping
 texture.magFilter = texture.minFilter = NearestFilter
 
 export default function VoxelDemoScreen() {
-  const refVox = useRef<InstanceProps>()
-  const vec4Helper = new Vector4(0, 0, 0, 0)
+  const refVox = useRef<InstanceAPI>() as MutableRefObject<InstanceAPI>
+  // const vec4Helper = new Vector4(0, 0, 0, 0)
+  let opacityHelper = 0
   let dir = 1
   let factor = (dir = 1 ? 1 : -1)
   useCappedFrame(() => {
     if (!refVox.current) return
-    dir = Math.min(3, vec4Helper.x) === 3 ? -1 : Math.max(2.1, vec4Helper.x) === 2.1 ? 1 : dir
+    dir = Math.min(1, opacityHelper) === 1 ? -1 : Math.max(0, opacityHelper) === 0 ? 1 : dir
+    // dir = Math.min(3, vec4Helper.x) === 3 ? -1 : Math.max(2.1, vec4Helper.x) === 2.1 ? 1 : dir
     factor = dir === 1 ? 1 : -1
     // console.log(Math.min(3, vec4Helper.x));
 
     // setAttribute('iSensitivity', vec4Helper.setX(Math.min(3, Math.max(2.1, vec4Helper.x + 0.01 * factor))), refVox.current.userData!.id)
+    opacityHelper += 0.01 * factor
+    refVox.current.updateAttribute('iOpacity', opacityHelper)
   })
   useEffect(() => {
     if (!refVox.current) return
-    console.log(refVox.current)
-    refVox.current.updateAttribute()
+    // console.log(refVox.current)
+    // refVox.current.updateAttribute('iOpacity', 0.25)
 
     // vec4Helper.copy(refVox.current.userData!.iUniforms.iSensitivity.value)
     // vec4Helper.setX(2)
@@ -55,7 +59,7 @@ export default function VoxelDemoScreen() {
           <StoneLight ref={refVox} position={[2, -2, 0]}  />
           <Color position={[0, 0, 2]} />
         </group> */}
-        {/* {Array(16) //15x12
+        {Array(16) //15x12
           .fill(Array(13).fill(0))
           .map((row, rIdx) => {
             return row.map((_: unknown, cIdx: number) => {
@@ -84,8 +88,8 @@ export default function VoxelDemoScreen() {
                 />
               )
             })
-          })} */}
-        <StoneLight position={[-2, 0, -2]} ref={refVox}/>
+          })}
+        <StoneLight position={[-2, 0, -2]} ref={refVox} />
         {/* <StoneLight position={[1, 0, 0]} />
         <StoneLight position={[2, 0, 0]} />
         <StoneLight position={[0, 0, 1]} />

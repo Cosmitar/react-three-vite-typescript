@@ -20,12 +20,14 @@ export const InstancedAttribute = forwardRef(({ name, value, defaultValue, defin
 
     const parentUserData = (ref.current as any).__r3f.parent.userData ?? { iUniforms: {} }
     const shaderMaterial = (ref.current as any).__r3f.parent.instance.current.material
-    shaderMaterial.defines[define] = ''
+    // adds define if needed
+    define && (shaderMaterial.defines[define] = '')
+
+    // still working with the approach of userData
+    // boot up iUniforms
     !parentUserData['iUniforms'] && (parentUserData['iUniforms'] = {})
+    // writes the value
     parentUserData.iUniforms[name] = { value, defaultValue }
-    // parentUserData.iUniforms[name] = { value: { ...parentUserData.iUniforms[name]?.value ?? 0, ...value }, defaultValue }
-    console.log(parentUserData.iUniforms[name]);
-    
 
     // parent.geometry.attributes[name] = ref.current
 

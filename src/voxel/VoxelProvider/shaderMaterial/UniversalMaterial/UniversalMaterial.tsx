@@ -8,6 +8,13 @@ import atlasTextureVertex from '../VoxelAtlasMaterial/vertex.glsl'
 import atlasTextureFragment from '../VoxelAtlasMaterial/fragment.glsl'
 import tonemappingFragment from './tonemapping_frag.glsl'
 import { glslCockpit, glslShapeVertex } from './shapes'
+
+import {
+  vertexShaderDef as opacityVertexDef,
+  vertexShaderMain as opacityVertexMain,
+  fragmentShaderDef as opacityFragmentDef,
+  fragmentShaderMain as opacityFragmentMain,
+} from '../../Attributes/Opacity'
 import {
   vertexShaderDef as flagsVertexDef,
   vertexShaderMain as flagsVertexMain,
@@ -22,21 +29,9 @@ export type UniversalMaterialPorps = iCSMParams<MaterialConstructor> & {
   }
 }
 
-export const unitCubeVPositions = [
-  new Vector3(-0.5, -0.5, 0.5),
-  new Vector3(-0.5, 0.5, 0.5),
-  new Vector3(0.5, 0.5, 0.5),
-  new Vector3(0.5, -0.5, 0.5),
-  new Vector3(-0.5, -0.5, -0.5),
-  new Vector3(-0.5, 0.5, -0.5),
-  new Vector3(0.5, 0.5, -0.5),
-  new Vector3(0.5, -0.5, -0.5),
-]
-
 const vertex = /*glsl*/ `
-attribute vec4 iSensitivity;
-varying vec4 Sensitivity;
 
+${opacityVertexDef}
 ${flagsVertexDef}
   
 uniform float uTime;
@@ -69,16 +64,15 @@ void main() {
 
   vWorldPosition = modelMatrix  * instanceMatrix * vec4( pos, 1.0 );
 
-  Sensitivity = iSensitivity;
-
+  ${opacityVertexMain}
   ${flagsVertexMain}
 }
 `
 
 const fragment = /*glsl*/ `
 
-varying vec4 Sensitivity;
 varying vec4 vWorldPosition;
+${opacityFragmentDef}
 ${flagsFragmentDef}
 
 uniform vec3 uMainLightSource;
@@ -136,38 +130,42 @@ void main() {
     csm_DiffuseColor.rgb = greyscale(text.rgb, 1.);
   }
 
-  // bool isGradientSensitive = isEqualFloat(Sensitivity.y, 1.);
   if(useGradient) {
     float clarity = ( vertex_displacement_vUv.y * 0.5 ) + 0.5;
     csm_DiffuseColor = vec4( csm_DiffuseColor.rgb * clarity, csm_DiffuseColor.w );
   }
 
-  // light/AO radius
-  bool isAOSensitive = isEqualFloat(Sensitivity.z, 1.);
-  vec3 originalColor = csm_DiffuseColor.rgb;
-  if(isAOSensitive && false) {
-    vec3 distanceVector = vWorldPosition.xyz - uMainLightSource;
-    vec2 distanceVector2D = vWorldPosition.xz - uMainLightSource.xz;
-    vec3 color2 = uncharted2(originalColor) * vec3(0.15, 0.15, 0.15);
-    vec3 color1 = uncharted2(originalColor);
-    // vec3 color1 = greyscale(csm_DiffuseColor.rgb, 1.);
-    float decay = 4.75;
-    float radius = 3.5;
-    csm_DiffuseColor = vec4(mix(color1, color2, clamp(length(distanceVector)/decay-radius/decay,0., 1.)),csm_DiffuseColor.w);
-  }
-  bool isTorchLightSensitive = isEqualFloat(Sensitivity.z, 2.);
-  if(isTorchLightSensitive && false) {
-    // torch
-    vec3 distanceVector = vWorldPosition.xyz - uTorchLightSource;
-    vec2 distanceVector2D = vWorldPosition.xz - uTorchLightSource.xz;
-    vec3 color4 = uncharted2(originalColor) * vec3(5.15, 5.15, 5.15);
-    vec3 color5 = uncharted2(csm_DiffuseColor.rgb);
-    // vec3 color1 = greyscale(csm_DiffuseColor.rgb, 1.);
-    float decay = 1.75;
-    float radius = 2.;
-    csm_DiffuseColor = vec4(mix(color4, color5, clamp(length(distanceVector)/decay-radius/decay,0., 1.)),csm_DiffuseColor.w);
+  ${opacityFragmentMain}
 
-  }
+  // GAME SPECIFICS
+  
+  // light/AO radius
+  // bool isAOSensitive = isEqualFloat(Sensitivity.z, 1.);
+  // vec3 originalColor = csm_DiffuseColor.rgb;
+  // if(isAOSensitive && false) {
+  //   vec3 distanceVector = vWorldPosition.xyz - uMainLightSource;
+  //   vec2 distanceVector2D = vWorldPosition.xz - uMainLightSource.xz;
+  //   vec3 color2 = uncharted2(originalColor) * vec3(0.15, 0.15, 0.15);
+  //   vec3 color1 = uncharted2(originalColor);
+  //   // vec3 color1 = greyscale(csm_DiffuseColor.rgb, 1.);
+  //   float decay = 4.75;
+  //   float radius = 3.5;
+  //   csm_DiffuseColor = vec4(mix(color1, color2, clamp(length(distanceVector)/decay-radius/decay,0., 1.)),csm_DiffuseColor.w);
+  // }
+
+  // bool isTorchLightSensitive = isEqualFloat(Sensitivity.z, 2.);
+  // if(isTorchLightSensitive && false) {
+  //   // torch
+  //   vec3 distanceVector = vWorldPosition.xyz - uTorchLightSource;
+  //   vec2 distanceVector2D = vWorldPosition.xz - uTorchLightSource.xz;
+  //   vec3 color4 = uncharted2(originalColor) * vec3(5.15, 5.15, 5.15);
+  //   vec3 color5 = uncharted2(csm_DiffuseColor.rgb);
+  //   // vec3 color1 = greyscale(csm_DiffuseColor.rgb, 1.);
+  //   float decay = 1.75;
+  //   float radius = 2.;
+  //   csm_DiffuseColor = vec4(mix(color4, color5, clamp(length(distanceVector)/decay-radius/decay,0., 1.)),csm_DiffuseColor.w);
+
+  // }
 
   // // EDGE LIGHT/SHADOW (POTENTIAL AO)
   // // Lighten the edges
@@ -194,19 +192,6 @@ void main() {
   // vec3 edgeMask = clamp( edgeMaskColor * multiplier, 0.0, 1.0 );
   // // shadow
   // csm_DiffuseColor = vec4(mix(csm_DiffuseColor.rgb, vec3(0.), clamp(edgeMask.r, 0., 0.5)), csm_DiffuseColor.w);
-
-  bool isWater = isEqualFloat(Sensitivity.w, 1.);
-  bool isLevelContained = isEqualFloat(Sensitivity.w, 2.) || isWater;
-  if(isLevelContained && (vWorldPosition.x > uLevelDimension.x /2. + 0.5 || vWorldPosition.z > uLevelDimension.y/2. + 0.5 ||
-    vWorldPosition.x < -uLevelDimension.x /2. - 0.5 || vWorldPosition.z < -uLevelDimension.y/2. - 0.5)
-  ) {
-      csm_DiffuseColor.w = 0.;
-  } else {
-    if(isWater) {
-      // translucent water
-      csm_DiffuseColor.w = 0.5;
-    }
-  }
 
   // this is not working as expected
   // bool isOpacity = Sensitivity.x > 2. && Sensitivity.x < 3.;

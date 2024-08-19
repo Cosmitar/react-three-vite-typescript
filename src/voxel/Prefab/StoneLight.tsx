@@ -28,7 +28,7 @@ export default forwardRef<InstanceAPI, InstanceProps>((props, fref) => {
         },
       }}
     >
-      <Opacity value={0.75} />
+      <Opacity value={1} />
       <Flags wind gradient />
     </ReactiveInstance>
   )

@@ -5,7 +5,6 @@ import { injectAttribute } from '../utils'
 import { useFrame } from '@react-three/fiber'
 import { Event } from 'eventery'
 import { MeshUniversalMaterial } from './shaderMaterial/UniversalMaterial/UniversalMaterial'
-import { decodeFlagsToBitmask, getEncodedFlags } from './Attributes/FlagsHelpers'
 
 const loader = new TextureLoader()
 // const texture = loader.load('images/texture_atlas_small_hd.png')
@@ -35,21 +34,6 @@ export default function VoxelProvider({ children, limit = 100 }: { children?: Re
 
   useEffect(() => {
     if (instancesRef.current) {
-      // const res = getEncodedSkin({
-      //   topFace: { x: 11, y: 1 },
-      //   bottomFace: { x: 11, y: 1 },
-      //   frontFace: { x: 11, y: 1 },
-      //   backFace: { x: 11, y: 1 },
-      //   leftFace: { x: 11, y: 1 },
-      //   rightFace: { x: 11, y: 1 },
-      // })
-      // console.log(res)
-      // console.log(decodeValuesToBitmask(res))
-      // console.log(instancesRef.current.geometry.attributes)
-      const res = getEncodedFlags({grayscale: true, wind:false, gradient:true})
-      console.log(res)
-      console.log(decodeFlagsToBitmask(res))
-
       parseInstanceAttributes(instancesRef.current!, limit)
     }
   }, [limit, refresh])
