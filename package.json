@@ -17,7 +17,7 @@
   "repository": "github:cosmitar/react-three-vite-typescript",
   "license": "MIT",
   "dependencies": {
-    "@react-three/drei": "9.96.1",
+    "@react-three/drei": "^9.111.1",
     "@react-three/fiber": "8.15.14",
     "eventery": "0.0.4",
     "howler": "2.2.3",
@@ -26,7 +26,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "state-composer": "^0.1.0",
-    "three": "0.160.1"
+    "three": "0.160.1",
+    "three-custom-shader-material": "^5.4.0"
   },
   "devDependencies": {
     "@gltf-transform/core": "3.5.1",
@@ -38,7 +39,7 @@
     "r3f-perf": "7.1.2",
     "sass": "^1.77.6",
     "typescript": "5.0.3",
-    "vite": "4.1.4",
+    "vite": "^5.4.0",
     "vite-plugin-glsl": "1.1.2",
     "vite-plugin-gltf": "3.1.0"
   },

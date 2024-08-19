@@ -10,6 +10,7 @@ const server = process.env.APP_ENV === 'sandbox' ? { hmr: { clientPort: 443 } } 
 export default defineConfig(async configEnv => {
   const glsl = (await import('vite-plugin-glsl')).default
   return {
+    base: './',
     server: server,
     resolve: {
       alias: {

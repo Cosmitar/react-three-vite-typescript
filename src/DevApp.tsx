@@ -12,7 +12,7 @@ const App = () => {
       <PlatformProvider>
         <OverlayTransitions>
           <UI />
-          <Canvas shadows camera={{ fov: 20, position: [-15, 25, 0] }} dpr={1.5}>
+          <Canvas shadows camera={{ fov: 20, position: [0, 20, 20] }} dpr={1.5}>
             <RouterScreen />
             <DevRouter />
           </Canvas>

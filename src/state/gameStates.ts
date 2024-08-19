@@ -7,6 +7,7 @@ export const GAME_STATES = {
   HOME: 'home',
   // DEV
   DEV_SCREEN_1: 'dev_screen_1',
+  DEV_SCREEN_2: 'dev_screen_2',
 }
 
 export const POPUP_STATES = {
@@ -43,3 +44,4 @@ export const popupTutorial = enterPopupTo(POPUP_STATES.TUTORIAL)
 
 // DEV
 export const enterDevScreen1 = enterTo(GAME_STATES.DEV_SCREEN_1)
+export const enterDevScreen2 = enterTo(GAME_STATES.DEV_SCREEN_2)
