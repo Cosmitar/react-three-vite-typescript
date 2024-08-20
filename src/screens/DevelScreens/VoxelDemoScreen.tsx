@@ -1,6 +1,6 @@
 import { Box, CameraControls } from '@react-three/drei'
 import VoxelProvider from '../../voxel/VoxelProvider/VoxelProvider'
-import { NearestFilter, RepeatWrapping, TextureLoader, Vector3Tuple, Vector4 } from 'three'
+import { NearestFilter, RepeatWrapping, TextureLoader, Vector3Tuple } from 'three'
 import { MutableRefObject, ReactNode, useEffect, useRef } from 'react'
 import useCappedFrame from '../../utils/useCappedFrames'
 

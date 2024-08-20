@@ -1,6 +1,5 @@
 import { ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { CONFIG_TRANSITION, ENTER_TRANSITION, EXIT_TRANSITION, TRANSITIONS_CONFIG } from './Events'
-import UI, { LAYERS } from '../UI/UI'
 
 const defaultConfig: TRANSITIONS_CONFIG = {
   color: 'black',
@@ -112,6 +111,7 @@ const CircleEffect = ({
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          overflow: 'hidden',
         }}
       >
         <div
@@ -136,6 +136,7 @@ const CircleEffect = ({
             transitionDelay: '0',
             backgroundColor: color,
             borderRadius: '50%',
+            maxHeight: '100%', // added to solve issue with carousel anchors
           }}
         />
       </div>

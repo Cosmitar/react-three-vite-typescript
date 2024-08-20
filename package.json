@@ -47,8 +47,10 @@
     "dev": "vite --host",
     "sandbox": "APP_ENV=sandbox vite",
     "build": "vite build",
+    "postbuild": "rm dist/images/*.*~",
     "preview": "vite preview",
-    "check_circular": "npx madge --circular ./src/App.tsx"
+    "check_circular": "npx madge --circular ./src/App.tsx",
+    "check_typescript": "tsc --noEmit --skipLibCheck"
   },
   "browserslist": [
     ">0.2%",

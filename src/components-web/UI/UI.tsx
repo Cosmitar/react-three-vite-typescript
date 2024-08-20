@@ -50,7 +50,7 @@ UI.Layer = ({ children, id, zIndex = 0, fullscreen }: { children: ReactNode; id:
     }
 
     return () => {
-      layer.remove()
+      layer?.remove()
     }
   }, [children])
 

@@ -1,13 +1,13 @@
-import { Instance, InstanceProps } from '@react-three/drei'
+import { InstanceProps } from '@react-three/drei'
 import { forwardRef } from 'react'
+import ReactiveInstance from '../VoxelProvider/ReactiveInstance'
 /**
  * this material is a helper to draw a "inner voxel", so you can only see inner walls of the cube. Maybe for rooms seen from inside or tranparency simulation by rendering backside, I'm thinking on a flame.
  * This effects is obtained by applying a scaleY = -1.
- * You have to provide the userData corresponding to the iSkinCode.
+ * You have to provide children for attributes.
  *
  * examples:
  * <InnerVox
- *  faceXY={{ x: 4, y: 1 }}
  *  userData={{
  *    iUniforms: {
  *      iSkinCode: {
@@ -21,18 +21,10 @@ import { forwardRef } from 'react'
 
 export default forwardRef<any, InstanceProps>((props, ref) => {
   return (
-    <Instance
-      ref={ref}
+    <ReactiveInstance
       {...props}
+      ref={ref}
       scale={[1, -1, 1]}
-      // userData={{
-      //   iUniforms: {
-      //     iSkinCode: {
-      //       value: [you atlas coords here],
-      //       defaultValue: new Vector3(1000000, 1000000, 1000000),
-      //     },
-      //   },
-      // }}
     />
   )
 })
