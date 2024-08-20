@@ -9,14 +9,14 @@ export type InstancedAttributeProps = JSX.IntrinsicElements['instancedBufferAttr
   name: string
   value: any
   defaultValue: any
-  define: string
+  define?: string
 }
 export const InstancedAttribute = forwardRef(({ name, value, defaultValue, define }: InstancedAttributeProps, fref) => {
   const ref = useRef<THREE.InstancedBufferAttribute>(null!)
   useImperativeHandle(fref, () => ref.current, [])
   useEffect(() => {
     //@ts-ignore
-    console.log(ref.current.__r3f.parent.instance.current.geometry.attributes)
+    // console.log(ref.current.__r3f.parent.instance.current.geometry.attributes)
 
     const parentUserData = (ref.current as any).__r3f.parent.userData ?? { iUniforms: {} }
     const shaderMaterial = (ref.current as any).__r3f.parent.instance.current.material

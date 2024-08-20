@@ -15,7 +15,6 @@ export const getEncodedFlags = ({ grayscale, wind, gradient }: typeof DEFAULT_FL
     part = (part << 1) | vars[j]
   }
   
-  console.log({ grayscale, wind }, part);
   return part
 }
 
