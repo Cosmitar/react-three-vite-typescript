@@ -116,14 +116,21 @@ void main() {
   // sets plain output
   csm_DiffuseColor = text;
 
-  if (isEqualColor(vColor,vec3(1., 1., 1.))) {
-    csm_DiffuseColor = text;
+  if (useColor) {
+    // mask so texture transparency shows defined color.
+    csm_DiffuseColor = vec4(mix(vColor, text.rgb, text.w), 1.);
+    // csm_DiffuseColor = vec4(0.,0.,0., 1.);
+  }
+
     // glow test
     // if(text.r <= 255./84.) {
     //   csm_DiffuseColor = vec4(vec3(csm_DiffuseColor.rgb * diffuse * 2.), csm_DiffuseColor.w);
     // }
-  }else {
+  
+  if (useTint) {
+    // tints texture by multiplying grayscale texture by defined color
     csm_DiffuseColor = vec4(greyscale(text.rgb, 1.) * vColor, text.w);
+    // csm_DiffuseColor = vec4(0.,0.,0., 1.);
   }
 
   if(useGrayscale) {

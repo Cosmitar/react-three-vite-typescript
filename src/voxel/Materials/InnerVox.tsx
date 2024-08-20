@@ -5,26 +5,8 @@ import ReactiveInstance from '../VoxelProvider/ReactiveInstance'
  * this material is a helper to draw a "inner voxel", so you can only see inner walls of the cube. Maybe for rooms seen from inside or tranparency simulation by rendering backside, I'm thinking on a flame.
  * This effects is obtained by applying a scaleY = -1.
  * You have to provide children for attributes.
- *
- * examples:
- * <InnerVox
- *  userData={{
- *    iUniforms: {
- *      iSkinCode: {
- *        value: [you atlas coords here],
- *        defaultValue: new Vector3(1000000, 1000000, 1000000),
- *      },
- *    },
- *  }}
- * />
  */
 
 export default forwardRef<any, InstanceProps>((props, ref) => {
-  return (
-    <ReactiveInstance
-      {...props}
-      ref={ref}
-      scale={[1, -1, 1]}
-    />
-  )
+  return <ReactiveInstance {...props} ref={ref} scale={[1, -1, 1]} />
 })

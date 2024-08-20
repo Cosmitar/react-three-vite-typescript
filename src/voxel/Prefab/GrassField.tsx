@@ -27,6 +27,6 @@ export default forwardRef<any, GroupProps>((props, fRef) => {
 const GrassBlade = (props: InstanceProps) => (
   <Color {...props} color={'#00aa00'} ref={null}>
     <ShapeAttribute value={SHAPES.FLAT} />
-    <FlagsAttribute wind gradient />
+    <FlagsAttribute wind gradient color/>
   </Color>
 )
