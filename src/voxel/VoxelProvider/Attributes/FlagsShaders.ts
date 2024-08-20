@@ -1,4 +1,4 @@
-import { vertexShaderMain as windVertexMain } from './Wind'
+import { vertexShaderMain as windVertexMain } from './WindAttribute'
 import { DEFAULT_FLAGS } from "./FlagsHelpers"
 
 const FLAGS_COUNT = Object.keys(DEFAULT_FLAGS).length

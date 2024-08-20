@@ -2,9 +2,9 @@ import { InstanceProps } from '@react-three/drei'
 import { forwardRef } from 'react'
 import { GroupProps } from '@react-three/fiber'
 import { SHAPES } from '../VoxelProvider/shaderMaterial/UniversalMaterial/shapes'
-import Shape from '../VoxelProvider/Attributes/Shape'
+import ShapeAttribute from '../VoxelProvider/Attributes/ShapeAttribute'
 import Color from '../Materials/Color'
-import Flags from '../VoxelProvider/Attributes/Flags'
+import FlagsAttribute from '../VoxelProvider/Attributes/FlagsAttribute'
 
 export default forwardRef<any, GroupProps>((props, fRef) => {
   const instanceNumber = 5000
@@ -26,7 +26,7 @@ export default forwardRef<any, GroupProps>((props, fRef) => {
 
 const GrassBlade = (props: InstanceProps) => (
   <Color {...props} color={'#00aa00'} ref={null}>
-    <Shape value={SHAPES.FLAT} />
-    <Flags wind gradient />
+    <ShapeAttribute value={SHAPES.FLAT} />
+    <FlagsAttribute wind gradient />
   </Color>
 )

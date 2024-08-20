@@ -6,10 +6,9 @@ import useCappedFrame from '../../utils/useCappedFrames'
 
 import ReactiveInstance, { InstanceAPI } from '../../voxel/VoxelProvider/ReactiveInstance'
 import TestCube from '../../voxel/Prefab/TestCube'
-import Shape from '../../voxel/VoxelProvider/Attributes/Shape'
+import ShapeAttribute from '../../voxel/VoxelProvider/Attributes/ShapeAttribute'
 import { SHAPES } from '../../voxel/VoxelProvider/shaderMaterial/UniversalMaterial/shapes'
-import Faces from '../../voxel/VoxelProvider/Attributes/Faces'
-import Flags from '../../voxel/VoxelProvider/Attributes/Flags'
+import FacesAttribute from '../../voxel/VoxelProvider/Attributes/FacesAttribute'
 import GrassField from '../../voxel/Prefab/GrassField'
 const loader = new TextureLoader()
 const texture = loader.load('images/texture_atlas_small_hd_16x16.png')
@@ -51,7 +50,7 @@ export default function VoxelDemoScreen() {
                   key={`block_${rIdx}-${cIdx}`}
                   position={[rIdx * 4, 0, cIdx * 4]}
                 >
-                  <Faces all={[rIdx, cIdx]} />
+                  <FacesAttribute all={[rIdx, cIdx]} />
                 </Block>
               )
             })
@@ -61,9 +60,9 @@ export default function VoxelDemoScreen() {
         <TestCube
           position={[-2, 0, -2]}
         >
-          <Shape value={SHAPES.PYRAMID} />
+          <ShapeAttribute value={SHAPES.PYRAMID} />
           {/* <Shape value={SHAPES.CUBE} /> */}
-          <Faces
+          <FacesAttribute
             all={[5, 11]}
 
             front={[1, 0]}

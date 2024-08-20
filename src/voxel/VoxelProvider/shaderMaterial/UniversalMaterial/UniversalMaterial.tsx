@@ -14,7 +14,7 @@ import {
   vertexShaderMain as opacityVertexMain,
   fragmentShaderDef as opacityFragmentDef,
   fragmentShaderMain as opacityFragmentMain,
-} from '../../Attributes/Opacity'
+} from '../../Attributes/OpacityAttribute'
 import {
   vertexShaderDef as flagsVertexDef,
   vertexShaderMain as flagsVertexMain,
@@ -138,7 +138,7 @@ void main() {
   ${opacityFragmentMain}
 
   // GAME SPECIFICS
-  
+
   // light/AO radius
   // bool isAOSensitive = isEqualFloat(Sensitivity.z, 1.);
   // vec3 originalColor = csm_DiffuseColor.rgb;

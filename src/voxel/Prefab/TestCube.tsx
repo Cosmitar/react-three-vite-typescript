@@ -1,12 +1,12 @@
 import { InstanceProps } from '@react-three/drei'
 import { forwardRef } from 'react'
 import ReactiveInstance, { InstanceAPI } from '../VoxelProvider/ReactiveInstance'
-import Opacity from '../VoxelProvider/Attributes/Opacity'
+import OpacityAttribute from '../VoxelProvider/Attributes/OpacityAttribute'
 
 export default forwardRef<InstanceAPI, InstanceProps>((props, fref) => {
   return (
     <ReactiveInstance {...props} ref={fref}>
-      <Opacity value={1} />
+      <OpacityAttribute value={1} />
       {props.children}
     </ReactiveInstance>
   )
