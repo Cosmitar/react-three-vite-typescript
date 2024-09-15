@@ -19,10 +19,6 @@
   "dependencies": {
     "@react-three/drei": "^9.111.1",
     "@react-three/fiber": "8.15.14",
-    "eventery": "0.0.4",
-    "howler": "2.2.3",
-    "miniplex": "2.0.0",
-    "miniplex-react": "2.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "state-composer": "^0.1.0",
@@ -36,7 +32,6 @@
     "@types/react-dom": "18.0.11",
     "@types/three": "0.150.0",
     "@vitejs/plugin-react": "3.1.0",
-    "r3f-perf": "7.1.2",
     "sass": "^1.77.6",
     "typescript": "5.0.3",
     "vite": "^5.4.0",
